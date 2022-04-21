@@ -4,7 +4,10 @@
 
 body {
   text-align: center;
-  background-color: #5f54bf;
+  background: #43cea2;  /* FROM CSSGRADIENT.IOfallback for old browsers */
+  background: -webkit-linear-gradient(to right, #185a9d, #43cea2);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #185a9d, #43cea2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .Row {
@@ -15,7 +18,7 @@ body {
 
 .Row-letter {
   margin: 2px;
-  border: 2px solid rgba(128, 128, 128, 0.8);
+  border: 2px solid rgb(255, 255, 255);
   flex: 1;
   max-width: 40px;
   height: 40px;
@@ -28,7 +31,7 @@ body {
 }
 .Row-letter-color {
   margin: 2px;
-  border: 2px solid rgba(128, 128, 128, 0.8);
+  border: 2px solid rgba(185, 172, 172, 0.8);
   flex: 1;
   max-width: 40px;
   height: 40px;
@@ -97,7 +100,7 @@ table.Game-rows > tbody {
 
 .Game-keyboard-button {
   margin: 2px;
-  background-color: #cdcdcd;
+  background-color: #ffffff;
   padding: 2px;
   text-transform: capitalize;
   border-radius: 4px;
@@ -269,4 +272,20 @@ a:active {
 .App-container.color-blind .letter-elsewhere,
 .App-container.color-blind .App-about b.yellow-bg {
   background-color: #85c0f9;
+}
+/* CSS styles for stopwatch adapted from https://github.com/tinloof/gold-stopwatch/blob/master/script.js*/
+.stopwatch {
+  display: flex;
+  margin-top: -100px;
+  float: center;
+  justify-items: center;
+  width: 100%;
+}
+.time {
+  font-family: inherit;
+  color:white;
+  margin: auto;
+  color: white;
+  font-weight: 300;
+  font-size: 48px;
 }

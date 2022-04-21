@@ -74,8 +74,7 @@ function App() {
       <h1>
         <span
           style={{
-            color: difficulty > 0 ? "#e66" : "inherit",
-            fontStyle: difficulty > 1 ? "italic" : "inherit",
+            color: "white",
           }}
         >
           blurtle

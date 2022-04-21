@@ -1,0 +1,8 @@
+20 April 2022:
+- forked "hello wordl" and made repository
+- installed npm and n to computer to be able to edit the code
+
+21 April 2022:
+- adjusted about page to reflect Blurtle rules
+- changed favicon
+- changed background color in CSS
