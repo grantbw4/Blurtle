@@ -10,76 +10,77 @@ export function About() {
         <a href="https://www.powerlanguage.co.uk/wordle/">
           <i>Wordle</i>
         </a>{" "}
-        by <a href="https://twitter.com/powerlanguish">powerlanguage</a>, which
-        I think is based on the TV show <i>Lingo</i>.
-      </p>
+        by <a href="https://twitter.com/powerlanguish">powerlanguage</a>
+      .</p>
       <p>
-        You get {maxGuesses} tries to guess a target word.
-        <br />
-        After each guess, you get Mastermind-style feedback.
+        This game is also heavily indebted to the game {" "}
+        <a href="https://hellowordl.net/">
+          <i>hello wordl</i>
+        </a>{" "}
+        and the code it has made publicly accessible on <a href="https://github.com/lynn/hello-wordl">GitHub</a>
+      .</p>
+      <p>
       </p>
       <hr />
+      <p>Basically, the goal of this game to guess a secret word as <i>quickly</i> as possible. In other words, you need to <i>blurt</i> out words until you arrive at the correct answer. You have unlimited guesses, but you will be timed.</p>
+      <hr />
+      <p></p>
+      <p>You will start the stopwatch by guessing a five-letter word. The game will then color the tiles to indicate how near you are to the actual word. For example, if you were to guess the word <i>blurt</i>:</p>
       <Row
         rowState={RowState.LockedIn}
-        wordLength={4}
+        wordLength={5}
         cluedLetters={[
-          { clue: Clue.Absent, letter: "w" },
-          { clue: Clue.Absent, letter: "o" },
-          { clue: Clue.Correct, letter: "r" },
-          { clue: Clue.Elsewhere, letter: "d" },
+          { clue: Clue.Absent, letter: "b" },
+          { clue: Clue.Absent, letter: "l" },
+          { clue: Clue.Absent, letter: "u" },
+          { clue: Clue.Elsewhere, letter: "r" },
+          { clue: Clue.Correct, letter: "t" },
         ]}
       />
       <p>
-        <b>W</b> and <b>O</b> aren't in the target word at all.
+        <b>B</b>, <b>L</b>, and <b>U</b> aren't in the target word at all.
       </p>
       <p>
-        <b className={"green-bg"}>R</b> is correct! The third letter is{" "}
-        <b className={"green-bg"}>R</b>
-        .<br />
-        <strong>(There may still be a second R in the word.)</strong>
-      </p>
-      <p>
-        <b className={"yellow-bg"}>D</b> occurs <em>elsewhere</em> in the target
-        word.
+        <b className={"yellow-bg"}>R</b> occurs <i>elsewhere</i> in the target word.
         <br />
-        <strong>(Perhaps more than once. 🤔)</strong>
+        <strong>(Maybe more than once??)</strong>
+        <br />
+      </p>
+      <p>
+        <b className={"green-bg"}>T</b> is in the correct spot.
+        <br />
+        <strong>(There may still be a second R in the word)</strong>
       </p>
       <hr />
       <p>
-        Let's move the <b>D</b> in our next guess:
+        Let's try another word. One rule in this game is that you <i>HAVE</i> to use <i>ALL</i> available information.
       </p>
       <Row
         rowState={RowState.LockedIn}
-        wordLength={4}
+        wordLength={5}
         cluedLetters={[
-          { clue: Clue.Correct, letter: "d" },
-          { clue: Clue.Correct, letter: "a" },
-          { clue: Clue.Correct, letter: "r" },
-          { clue: Clue.Absent, letter: "k" },
+          { clue: Clue.Correct, letter: "G" },
+          { clue: Clue.Correct, letter: "R" },
+          { clue: Clue.Absent, letter: "E" },
+          { clue: Clue.Elsewhere, letter: "A" },
+          { clue: Clue.Correct, letter: "T" },
         ]}
         annotation={"So close!"}
       />
       <Row
         rowState={RowState.LockedIn}
-        wordLength={4}
+        wordLength={5}
         cluedLetters={[
-          { clue: Clue.Correct, letter: "d" },
-          { clue: Clue.Correct, letter: "a" },
-          { clue: Clue.Correct, letter: "r" },
-          { clue: Clue.Correct, letter: "t" },
+          { clue: Clue.Correct, letter: "G" },
+          { clue: Clue.Correct, letter: "R" },
+          { clue: Clue.Correct, letter: "A" },
+          { clue: Clue.Correct, letter: "N" },
+          { clue: Clue.Correct, letter: "T" },
         ]}
-        annotation={"Got it!"}
+        annotation={"Congrats!"}
       />
       <p>
-        Report issues{" "}
-        <a href="https://github.com/lynn/hello-wordl/issues">here</a>, or tweet{" "}
-        <a href="https://twitter.com/chordbug">@chordbug</a>.
-      </p>
-      <p>
-        This game will be free and ad-free forever,
-        <br />
-        but you can <a href="https://ko-fi.com/chordbug">buy me a coffee</a> if
-        you'd like.
+        Best of luck! Enjoy your gameplay.
       </p>
     </div>
   );
