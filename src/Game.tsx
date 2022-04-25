@@ -3,6 +3,8 @@ import { Row, RowState } from "./Row";
 import dictionary from "./dictionary.json";
 import { Clue, clue, describeClue, violation } from "./clue";
 import { Keyboard } from "./Keyboard";
+import { Stopwatch } from "./Stopwatch";
+import { render } from "react-dom";
 import targetList from "./targets.json";
 import {
   describeSeed,
@@ -257,7 +259,6 @@ function Game(props: GameProps) {
         />
       );
     });
-
   return (
     <div className="Game" style={{ display: props.hidden ? "none" : "block" }} >
       <div className="Game-options" style={{ display: "none"}}>
@@ -325,6 +326,15 @@ function Game(props: GameProps) {
           : seed
           ? `${describeSeed(seed)} — length ${wordLength}, game ${gameNumber}`
           : "playing a random game"}
+      </div>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <div className="stopwatch"> {/* !-CSS code for stopwatch adapted https://github.com/tinloof/gold-stopwatch/blob/master/script.js */}    
+      <div className="time" id="display"> <Stopwatch /> </div>
       </div>
       <p>
         <button

@@ -1,7 +1,7 @@
 import "./App.css";
 import { maxGuesses, seed, urlParam } from "./util";
 import Game from "./Game";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { About } from "./About";
 
 function useSetting<T>(
@@ -86,16 +86,16 @@ function App() {
         ) : (
           <>
             {link("❓", "About", "about")}
-            {link("⚙️", "Settings", "settings")}
           </>
         )}
       </div>
-      <div
+      <div 
         style={{
           position: "absolute",
           left: 5,
           top: 5,
           visibility: page === "game" ? "visible" : "hidden",
+          display: "none"
         }}
       >
         <a href={seed ? "?random" : "?seed=" + todaySeed}>
@@ -104,7 +104,7 @@ function App() {
       </div>
       {page === "about" && <About />}
       {page === "settings" && (
-        <div className="Settings">
+        <div className="Settings" style={{ display: "none"}}>
           <div className="Settings-setting">
             <input
               id="dark-setting"
