@@ -259,9 +259,8 @@ function Game(props: GameProps) {
     });
 
   return (
-    <div className="Game" style={{ display: props.hidden ? "none" : "block" }}>
-      <div className="Game-options">
-        <label htmlFor="wordLength">Letters:</label>
+    <div className="Game" style={{ display: props.hidden ? "none" : "block" }} >
+      <div className="Game-options" style={{ display: "none"}}>
         <input
           type="range"
           min={minLength}
@@ -273,7 +272,7 @@ function Game(props: GameProps) {
           }
           value={wordLength}
           onChange={(e) => {
-            const length = Number(e.target.value);
+            const length = 5;
             resetRng();
             setGameNumber(1);
             setGameState(GameState.Playing);
@@ -320,7 +319,7 @@ function Game(props: GameProps) {
         letterInfo={letterInfo}
         onKey={onKey}
       />
-      <div className="Game-seed-info">
+      <div className="Game-seed-info" style={{ display: "none"}}>
         {challenge
           ? "playing a challenge game"
           : seed

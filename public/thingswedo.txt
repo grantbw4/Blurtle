@@ -6,3 +6,6 @@
 - adjusted about page to reflect Blurtle rules
 - changed favicon
 - changed background color in CSS
+
+25 April 2022:
+- got rid of slider
