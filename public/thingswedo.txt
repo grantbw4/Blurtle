@@ -9,3 +9,6 @@
 
 25 April 2022:
 - got rid of slider
+- got rid of settings
+- got rid of random/today option
+- added a stopwatch
