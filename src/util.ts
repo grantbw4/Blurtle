@@ -7,7 +7,7 @@ export enum Difficulty {
 }
 
 export const gameName = "blurtle";
-export const maxGuesses = 1;
+export const maxGuesses = 20;
 
 export const dictionarySet: Set<string> = new Set(dictionary);
 

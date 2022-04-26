@@ -199,6 +199,7 @@ function Game(props: GameProps) {
         `You ${verbed}! The answer was ${target.toUpperCase()}. (Enter to ${
           challenge ? "play a random game" : "play again"
         })`;
+      
 
       if (currentGuess === target) {
         setHint(gameOver("won"));
@@ -337,7 +338,7 @@ function Game(props: GameProps) {
       <div className="time" id="display"> <Stopwatch /> </div>
       </div>
       <p>
-        <button
+        <button className="pretty_button"
           onClick={() => {
             share("Link copied to clipboard!");
           }}
@@ -345,7 +346,7 @@ function Game(props: GameProps) {
           Share a link to this game
         </button>{" "}
         {gameState !== GameState.Playing && (
-          <button
+          <button className="pretty_button"
             onClick={() => {
               const emoji = props.colorBlind
                 ? ["⬛", "🟦", "🟧"]

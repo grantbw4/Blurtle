@@ -12,3 +12,15 @@
 - got rid of settings
 - got rid of random/today option
 - added a stopwatch
+
+26 April 2022:
+- Added dynamic background
+- Changed CSS of "share link" button
+
+Things left to do:
+
+- automate stopwatch
+- infinite number of guesses but only one row
+- make sure difficulty is right
+- add stopwatch to score to be sent out
+- Just one per day

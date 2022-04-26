@@ -66,7 +66,7 @@ export function violation(
   if (difficulty === Difficulty.Normal) {
     return undefined;
   }
-  const ultra = difficulty === Difficulty.UltraHard;
+  const ultra = difficulty === Difficulty.Hard;
   let i = 0;
   for (const { letter, clue } of clues) {
     const clueCount = clues.filter(

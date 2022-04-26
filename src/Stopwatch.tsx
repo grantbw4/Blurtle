@@ -73,21 +73,18 @@ export function Stopwatch() {
       <div className="space-x-4">
         <button
           onClick={() => dispatch({ type: "reset" })}
-          className="bg-yellow-500 hover:bg-yellow-600 border-4 border-yellow-700 rounded-full w-16 h-16"
         >
           Reset
         </button>
         {!state.running ? (
           <button
             onClick={() => dispatch({ type: "start" })}
-            className="bg-green-500 hover:bg-green-600 border-4 border-green-700 rounded-full w-16 h-16"
           >
             Start
           </button>
         ) : (
           <button
             onClick={() => dispatch({ type: "stop" })}
-            className="bg-red-500 hover:bg-red-600 border-4 border-red-700 rounded-full w-16 h-16"
           >
             Stop
           </button>
