@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import React, { useEffect, useImperativeHandle, useReducer } from "react";
 
 /* Adapted from https://codesandbox.io/s/react-stopwatch-uwyjf?file=/src/index.tsx:63-145*/
 
@@ -13,7 +13,7 @@ type StopwatchActions =
   | { type: "reset" }
   | { type: "tick" };
 
-function StopwatchReducer(
+export function StopwatchReducer(
   state: StopwatchState,
   action: StopwatchActions
 ): StopwatchState {
@@ -46,7 +46,7 @@ function parseTime(
     milliseconds
   };
 }
-export function Stopwatch() {
+export const Stopwatch = React.forwardRef((props, ref) => {
   const [state, dispatch] = useReducer(StopwatchReducer, {
     running: false,
     currentTime: 0,
@@ -61,6 +61,19 @@ export function Stopwatch() {
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
   }, []);
+
+  useImperativeHandle(ref, () => ({
+      start: () => {
+        dispatch({ type: "start" })
+      },
+      stop: () => {
+        dispatch({ type: "stop" })
+      },
+      reset: () => {
+        dispatch({ type: "reset" })
+      }
+  }))
+
   const time = parseTime(state.currentTime);
   return (
     <div className="bg-gray-900 text-white h-screen flex flex-col justify-center items-center">
@@ -70,26 +83,6 @@ export function Stopwatch() {
         {time.seconds.toString().padStart(2, "0")}.
         {time.milliseconds.toString().padStart(3, "0")}
       </span>
-      <div className="space-x-4">
-        <button
-          onClick={() => dispatch({ type: "reset" })}
-        >
-          Reset
-        </button>
-        {!state.running ? (
-          <button
-            onClick={() => dispatch({ type: "start" })}
-          >
-            Start
-          </button>
-        ) : (
-          <button
-            onClick={() => dispatch({ type: "stop" })}
-          >
-            Stop
-          </button>
-        )}
-      </div>
     </div>
   );
-}
+});

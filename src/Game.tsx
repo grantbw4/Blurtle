@@ -4,7 +4,6 @@ import dictionary from "./dictionary.json";
 import { Clue, clue, describeClue, violation } from "./clue";
 import { Keyboard } from "./Keyboard";
 import { Stopwatch } from "./Stopwatch";
-import { render } from "react-dom";
 import targetList from "./targets.json";
 import {
   describeSeed,
@@ -116,6 +115,7 @@ function Game(props: GameProps) {
     }
   }, [wordLength, gameNumber]);
   const tableRef = useRef<HTMLTableElement>(null);
+  const stopwatchRef = useRef<any>(null);
   const startNextGame = () => {
     if (challenge) {
       // Clear the URL parameters:
@@ -159,8 +159,14 @@ function Game(props: GameProps) {
   }
 
   const onKey = (key: string) => {
+    if (stopwatchRef.current) {
+      stopwatchRef.current.start();
+    }
     if (gameState !== GameState.Playing) {
       if (key === "Enter") {
+        if (stopwatchRef.current) {
+          stopwatchRef.current.reset();
+        }
         startNextGame();
       }
       return;
@@ -196,17 +202,25 @@ function Game(props: GameProps) {
       setCurrentGuess((guess) => "");
 
       const gameOver = (verbed: string) =>
+
         `You ${verbed}! The answer was ${target.toUpperCase()}. (Enter to ${
           challenge ? "play a random game" : "play again"
         })`;
-      
 
       if (currentGuess === target) {
         setHint(gameOver("won"));
         setGameState(GameState.Won);
+
+        if (stopwatchRef.current) {
+          stopwatchRef.current.stop();
+        }
       } else if (guesses.length + 1 === props.maxGuesses) {
         setHint(gameOver("lost"));
         setGameState(GameState.Lost);
+
+        if (stopwatchRef.current) {
+          stopwatchRef.current.stop();
+        }
       } else {
         setHint("");
         speak(describeClue(clue(currentGuess, target)));
@@ -230,12 +244,27 @@ function Game(props: GameProps) {
   }, [currentGuess, gameState]);
 
   let letterInfo = new Map<string, Clue>();
-  const tableRows = Array(props.maxGuesses)
+  
+  const tableRows = Array(2)
     .fill(undefined)
     .map((_, i) => {
-      const guess = [...guesses, currentGuess][i] ?? "";
+      let guess = '';
+
+      if (guesses.length >= 1) {
+        if (i === 0) {
+          guess = guesses[guesses.length - 1];
+        } else {
+          guess = currentGuess;
+        }
+      } else {
+        if (i === 0) {
+          guess = currentGuess;
+        } 
+      }
+      
       const cluedLetters = clue(guess, target);
-      const lockedIn = i < guesses.length;
+      const lockedIn = guesses.length !== 0 && i === 0;
+
       if (lockedIn) {
         for (const { clue, letter } of cluedLetters) {
           if (clue === undefined) break;
@@ -335,7 +364,7 @@ function Game(props: GameProps) {
       <br></br>
       <br></br>
       <div className="stopwatch"> {/* !-CSS code for stopwatch adapted https://github.com/tinloof/gold-stopwatch/blob/master/script.js */}    
-      <div className="time" id="display"> <Stopwatch /> </div>
+      <div className="time" id="display"> <Stopwatch ref={stopwatchRef} /> </div>
       </div>
       <p>
         <button className="pretty_button"

@@ -16,11 +16,14 @@
 26 April 2022:
 - Added dynamic background
 - Changed CSS of "share link" button
+- make sure difficulty is right
+
+27 April 2022:
+- infinite number of guesses but only two rows
+- automate stopwatch using ref
 
 Things left to do:
-
-- automate stopwatch
-- infinite number of guesses but only one row
-- make sure difficulty is right
+- infinite number of guesses but only two rows
 - add stopwatch to score to be sent out
 - Just one per day
+- Make letters stay gray

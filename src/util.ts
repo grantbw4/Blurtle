@@ -7,7 +7,7 @@ export enum Difficulty {
 }
 
 export const gameName = "blurtle";
-export const maxGuesses = 20;
+export const maxGuesses = 100;
 
 export const dictionarySet: Set<string> = new Set(dictionary);
 
@@ -58,7 +58,7 @@ export function speak(
 }
 
 export function ordinal(n: number): string {
-  return n + ([, "st", "nd", "rd"][(n % 100 >> 3) ^ 1 && n % 10] || "th");
+  return n + (["st", "nd", "rd"][(n % 100 >> 3) ^ 1 && n % 10] || "th");
 }
 
 export const englishNumbers =

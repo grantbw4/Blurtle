@@ -5,7 +5,7 @@
 body {
   /* CSS adapted from https://codepen.io/P1N2O/pen/pyBNzX*/
   text-align: center;
-  background: linear-gradient(-45deg, #346687, #4083a1, #4fc6f1, #0be7b4);
+  background: linear-gradient(-45deg, #fff200, #53b7bb, #21baf1, #fff200);
 	background-size: 400% 400%;
 	animation: gradient 15s ease infinite;
 	height: 100vh;
