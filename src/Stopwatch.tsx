@@ -33,7 +33,7 @@ export function StopwatchReducer(
       };
   }
 }
-function parseTime(
+export function parseTime(
   time: number
 ): { minutes: number; seconds: number; milliseconds: number } {
   const date = new Date(time);
@@ -77,7 +77,7 @@ export const Stopwatch = React.forwardRef((props, ref) => {
   const time = parseTime(state.currentTime);
   return (
     <div className="bg-gray-900 text-white h-screen flex flex-col justify-center items-center">
-      <span className="text-6xl font-bold tabular-nums">
+      <span className="text-6xl font-bold tabular-nums" id="display">
 
         {time.minutes.toString().padStart(2, "0")}:
         {time.seconds.toString().padStart(2, "0")}.

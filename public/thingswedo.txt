@@ -21,9 +21,10 @@
 27 April 2022:
 - infinite number of guesses but only two rows
 - automate stopwatch using ref
+- Make letters stay gray
+- infinite number of guesses but only two rows
+
 
 Things left to do:
-- infinite number of guesses but only two rows
 - add stopwatch to score to be sent out
 - Just one per day
-- Make letters stay gray

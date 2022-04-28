@@ -34,6 +34,7 @@ interface GameProps {
 
 const targets = targetList.slice(0, targetList.indexOf("murky") + 1); // Words no rarer than this one
 const minLength = 4;
+let completionTime = document.getElementById("display"); 
 const defaultLength = 5;
 const maxLength = 11;
 const limitLength = (n: number) =>
@@ -214,6 +215,8 @@ function Game(props: GameProps) {
         if (stopwatchRef.current) {
           stopwatchRef.current.stop();
         }
+        /* record stopwatch time */
+        let completionTime = document.getElementById("display"); 
       } else if (guesses.length + 1 === props.maxGuesses) {
         setHint(gameOver("lost"));
         setGameState(GameState.Lost);
@@ -221,6 +224,8 @@ function Game(props: GameProps) {
         if (stopwatchRef.current) {
           stopwatchRef.current.stop();
         }
+        /* record stopwatch time */
+        let completionTime = document.getElementById("display");
       } else {
         setHint("");
         speak(describeClue(clue(currentGuess, target)));
@@ -244,7 +249,17 @@ function Game(props: GameProps) {
   }, [currentGuess, gameState]);
 
   let letterInfo = new Map<string, Clue>();
-  
+  for (let guess of guesses) {
+    const cluedLetters = clue(guess, target);
+
+    for (const { clue, letter } of cluedLetters) {
+      if (clue === undefined) break;
+      const old = letterInfo.get(letter);
+      if (old === undefined || clue > old) {
+        letterInfo.set(letter, clue);
+      }
+    }
+  }
   const tableRows = Array(2)
     .fill(undefined)
     .map((_, i) => {
@@ -261,19 +276,9 @@ function Game(props: GameProps) {
           guess = currentGuess;
         } 
       }
-      
       const cluedLetters = clue(guess, target);
-      const lockedIn = guesses.length !== 0 && i === 0;
+      const lockedIn = i < guesses.length && i === 0;
 
-      if (lockedIn) {
-        for (const { clue, letter } of cluedLetters) {
-          if (clue === undefined) break;
-          const old = letterInfo.get(letter);
-          if (old === undefined || clue > old) {
-            letterInfo.set(letter, clue);
-          }
-        }
-      }
       return (
         <Row
           key={i}
@@ -289,6 +294,7 @@ function Game(props: GameProps) {
         />
       );
     });
+
   return (
     <div className="Game" style={{ display: props.hidden ? "none" : "block" }} >
       <div className="Game-options" style={{ display: "none"}}>
@@ -364,7 +370,7 @@ function Game(props: GameProps) {
       <br></br>
       <br></br>
       <div className="stopwatch"> {/* !-CSS code for stopwatch adapted https://github.com/tinloof/gold-stopwatch/blob/master/script.js */}    
-      <div className="time" id="display"> <Stopwatch ref={stopwatchRef} /> </div>
+      <div className="time" > <Stopwatch ref={stopwatchRef} /> </div>
       </div>
       <p>
         <button className="pretty_button"
@@ -383,7 +389,7 @@ function Game(props: GameProps) {
               const score = gameState === GameState.Lost ? "X" : guesses.length;
               share(
                 "Result copied to clipboard!",
-                `${gameName} ${score}/${props.maxGuesses}\n` +
+                `${gameName} ${completionTime} ${score}\n` +
                   guesses
                     .map((guess) =>
                       clue(guess, target)
