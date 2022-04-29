@@ -71,6 +71,9 @@ export const Stopwatch = React.forwardRef((props, ref) => {
       },
       reset: () => {
         dispatch({ type: "reset" })
+      },
+      getTime: () => {
+        return parseTime(state.currentTime);
       }
   }))
 

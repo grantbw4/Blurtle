@@ -34,7 +34,6 @@ interface GameProps {
 
 const targets = targetList.slice(0, targetList.indexOf("murky") + 1); // Words no rarer than this one
 const minLength = 4;
-let completionTime = document.getElementById("display"); 
 const defaultLength = 5;
 const maxLength = 11;
 const limitLength = (n: number) =>
@@ -89,9 +88,11 @@ function Game(props: GameProps) {
   const [guesses, setGuesses] = useState<string[]>([]);
   const [currentGuess, setCurrentGuess] = useState<string>("");
   const [challenge, setChallenge] = useState<string>(initChallenge);
+  const [completionTime, setCompletionTime] = useState('');
   const [wordLength, setWordLength] = useState(
     challenge ? challenge.length : parseUrlLength()
   );
+  const [finalMessage, setFinalMessage] = useState<string>("");
   const [gameNumber, setGameNumber] = useState(parseUrlGameNumber());
   const [target, setTarget] = useState(() => {
     resetRng();
@@ -211,21 +212,30 @@ function Game(props: GameProps) {
       if (currentGuess === target) {
         setHint(gameOver("won"));
         setGameState(GameState.Won);
+        setFinalMessage("I won!");
 
         if (stopwatchRef.current) {
           stopwatchRef.current.stop();
         }
-        /* record stopwatch time */
-        let completionTime = document.getElementById("display"); 
+        let completionTimeObject = stopwatchRef.current.getTime();
+        setCompletionTime(
+          completionTimeObject.minutes.toString().padStart(2, "0") + ':' +
+          completionTimeObject.seconds.toString().padStart(2, "0")  + ':' +
+          completionTimeObject.milliseconds.toString().padStart(3, "0")
+        );
       } else if (guesses.length + 1 === props.maxGuesses) {
         setHint(gameOver("lost"));
+        setFinalMessage("I lost!");
         setGameState(GameState.Lost);
-
+        let completionTimeObject = stopwatchRef.current.getTime();
+        setCompletionTime(
+          completionTimeObject.minutes.toString().padStart(2, "0") + ':' +
+          completionTimeObject.seconds.toString().padStart(2, "0")  + ':' +
+          completionTimeObject.milliseconds.toString().padStart(3, "0")
+        );
         if (stopwatchRef.current) {
           stopwatchRef.current.stop();
         }
-        /* record stopwatch time */
-        let completionTime = document.getElementById("display");
       } else {
         setHint("");
         speak(describeClue(clue(currentGuess, target)));
@@ -320,19 +330,6 @@ function Game(props: GameProps) {
             setHint(`${length} letters`);
           }}
         ></input>
-        <button
-          style={{ flex: "0 0 auto" }}
-          disabled={gameState !== GameState.Playing || guesses.length === 0}
-          onClick={() => {
-            setHint(
-              `The answer was ${target.toUpperCase()}. (Enter to play again)`
-            );
-            setGameState(GameState.Lost);
-            (document.activeElement as HTMLElement)?.blur();
-          }}
-        >
-          Give up
-        </button>
       </div>
       <table
         className="Game-rows"
@@ -373,23 +370,47 @@ function Game(props: GameProps) {
       <div className="time" > <Stopwatch ref={stopwatchRef} /> </div>
       </div>
       <p>
-        <button className="pretty_button"
-          onClick={() => {
-            share("Link copied to clipboard!");
-          }}
-        >
-          Share a link to this game
-        </button>{" "}
+      {gameState === GameState.Playing && guesses.length !== 0 && (
+        <button
+            className="pretty_button"
+            style={{ flex: "0 0 auto" }}
+            disabled={gameState !== GameState.Playing || guesses.length === 0}
+            onClick={() => {
+              let completionTimeObject = stopwatchRef.current.getTime();
+              setCompletionTime(
+                completionTimeObject.minutes.toString().padStart(2, "0") + ':' +
+                completionTimeObject.seconds.toString().padStart(2, "0")  + ':' +
+                completionTimeObject.milliseconds.toString().padStart(3, "0")
+              );
+              if (stopwatchRef.current) {
+                stopwatchRef.current.stop();
+              }
+              setFinalMessage("I gave up!");
+              setHint(
+                `The answer was ${target.toUpperCase()}. (Enter to play again)`
+              );
+              setGameState(GameState.Lost);
+              (document.activeElement as HTMLElement)?.blur();
+            }}
+          >
+            Give up
+        </button>
+      )}
         {gameState !== GameState.Playing && (
           <button className="pretty_button"
             onClick={() => {
               const emoji = props.colorBlind
                 ? ["⬛", "🟦", "🟧"]
                 : ["⬛", "🟨", "🟩"];
-              const score = gameState === GameState.Lost ? "X" : guesses.length;
+              const d = new Date();
+              let d_day = d.getDate();
+              let d_month = d.getMonth();
+              let d_year = d.getFullYear();
               share(
                 "Result copied to clipboard!",
-                `${gameName} ${completionTime} ${score}\n` +
+                `${gameName} ${d_month}/${d_day}/${d_year}\n` +
+                `${finalMessage}\n` + 
+                `${completionTime}\n` +
                   guesses
                     .map((guess) =>
                       clue(guess, target)

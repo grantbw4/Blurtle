@@ -23,8 +23,10 @@
 - automate stopwatch using ref
 - Make letters stay gray
 - infinite number of guesses but only two rows
+- add stopwatch to score to be sent out
 
+29 April 2022: 
+- Brought back give up button
 
 Things left to do:
-- add stopwatch to score to be sent out
 - Just one per day
