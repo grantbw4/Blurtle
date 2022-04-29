@@ -161,8 +161,10 @@ function Game(props: GameProps) {
   }
 
   const onKey = (key: string) => {
-    if (stopwatchRef.current) {
-      stopwatchRef.current.start();
+    if (key === "Enter") {
+      if (stopwatchRef.current) {
+        stopwatchRef.current.start();
+      }
     }
     if (gameState !== GameState.Playing) {
       if (key === "Enter") {

@@ -27,6 +27,10 @@
 
 29 April 2022: 
 - Brought back give up button
+- Added messages to score to be sent out
 
 Things left to do:
-- Just one per day
+- Change URL so there's only one target per day
+- Add Linear Gauge
+- Make Stopwatch not jump around
+- Add cookies to track users and keep a streak
