@@ -32,9 +32,8 @@
 
 02 May 2022:
 -fixed stopwatch jitter (potentially messing up other things)
+- Game defaults to one word a day feature
 
 Things left to do:
-- Change URL so there's only one target per day
 - Add Linear Gauge
-- Make Stopwatch not jump around
 - Add cookies to track users and keep a streak

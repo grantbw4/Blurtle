@@ -49,7 +49,7 @@ function App() {
 
   useEffect(() => {
     document.body.className = dark ? "dark" : "";
-    if (urlParam("today") !== null || urlParam("todas") !== null) {
+    if (urlParam("today") !== null || urlParam("todas") !== null || urlParam("random") === null && urlParam("seed") === null) {
       document.location = "?seed=" + todaySeed;
     }
     setTimeout(() => {
@@ -98,7 +98,7 @@ function App() {
           display: "none"
         }}
       >
-        <a href={seed ? "?seed=" + todaySeed : "?seed=" + todaySeed}>
+        <a href={seed ? "?random" : "?seed=" + todaySeed}>
           {seed ? "Random" : "Today's"}
         </a>
       </div>
