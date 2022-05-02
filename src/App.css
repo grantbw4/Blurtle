@@ -297,8 +297,8 @@ a:active {
 .time {
   font-family: inherit;
   color:white;
-  margin-left: 140px;
-  margin-top: 10px;
+  margin: auto;
+  font-variant-numeric: tabular-nums;
   color: white;
   font-weight: 300;
   font-size: 48px;
