@@ -98,7 +98,7 @@ function App() {
           display: "none"
         }}
       >
-        <a href={seed ? "?random" : "?seed=" + todaySeed}>
+        <a href={seed ? "?seed=" + todaySeed : "?seed=" + todaySeed}>
           {seed ? "Random" : "Today's"}
         </a>
       </div>
