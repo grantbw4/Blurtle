@@ -37,3 +37,4 @@
 Things left to do:
 - Add Linear Gauge
 - Add cookies to track users and keep a streak
+- Get rid of length and game
