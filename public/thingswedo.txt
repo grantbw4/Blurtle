@@ -29,6 +29,10 @@
 - Brought back give up button
 - Added messages to score to be sent out
 
+
+02 May 2022:
+-fixed stopwatch jitter (potentially)
+
 Things left to do:
 - Change URL so there's only one target per day
 - Add Linear Gauge
