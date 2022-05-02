@@ -31,7 +31,7 @@
 
 
 02 May 2022:
--fixed stopwatch jitter (potentially)
+-fixed stopwatch jitter (potentially messing up other things)
 
 Things left to do:
 - Change URL so there's only one target per day
