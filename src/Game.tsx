@@ -17,7 +17,6 @@ import {
   urlParam,
 } from "./util";
 import { decode, encode } from "./base64";
-
 enum GameState {
   Playing,
   Won,
@@ -47,6 +46,8 @@ function randomTarget(wordLength: number): string {
   } while (/\*/.test(candidate));
   return candidate;
 }
+
+
 
 function getChallengeUrl(target: string): string {
   return (
@@ -118,6 +119,15 @@ function Game(props: GameProps) {
   }, [wordLength, gameNumber]);
   const tableRef = useRef<HTMLTableElement>(null);
   const stopwatchRef = useRef<any>(null);
+
+  function checkTimer(): string {
+    return (
+      stopwatchRef.current.getTime()
+    );
+  
+  }
+
+  
   const startNextGame = () => {
     if (challenge) {
       // Clear the URL parameters:
@@ -164,6 +174,7 @@ function Game(props: GameProps) {
     if (key === "Enter") {
       if (stopwatchRef.current) {
         stopwatchRef.current.start();
+        
       }
     }
     if (gameState !== GameState.Playing) {
@@ -359,6 +370,9 @@ function Game(props: GameProps) {
           : "playing a random game"}
       </div>
       </div>
+      <div className="stars-outer">
+          <div className="stars-inner"></div>
+        </div>
       <br></br>
       <br></br>
       <br></br>

@@ -8,7 +8,7 @@ body {
   background: linear-gradient(-45deg, #fff200, #53b7bb, #21baf1, #fff200);
 	background-size: 400% 400%;
 	animation: gradient 15s ease infinite;
-	height: 100vh;
+	height: 95vh;
 }
 
 @keyframes gradient {
@@ -78,6 +78,7 @@ body {
 .Game,
 h1 {
   user-select: none;
+  height:10vh;
 }
 
 .Game {
@@ -86,7 +87,7 @@ h1 {
 }
 
 .Page-top {
-  height: 50vh;
+  height: 30vh;
 }
 
 table.Game-rows {
@@ -291,6 +292,36 @@ a:active {
 .App-container.color-blind .App-about b.yellow-bg {
   background-color: #85c0f9;
 }
+
+/* stars adapted from https://webdesign.tutsplus.com/tutorials/a-simple-javascript-technique-for-filling-star-ratings--cms-29450*/
+.stars-outer {
+  display: inline-block;
+  position: relative;
+  font-family: FontAwesome;
+  font-size: 2em;
+  height: 20vh;
+}
+ 
+.stars-outer::before {
+  content: "\f006 \f006 \f006 \f006 \f006";
+}
+ 
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+}
+ 
+.stars-inner::before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  color: #f8ce0b;
+}
+
+
+
 /* CSS styles for stopwatch adapted from https://github.com/tinloof/gold-stopwatch/blob/master/script.js*/
 .stopwatch {
   display: flex;
