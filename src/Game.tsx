@@ -106,7 +106,7 @@ function Game(props: GameProps) {
       : `Make your first guess!`
   );
   const currentSeedParams = () =>
-    `?seed=${seed}&length=${wordLength}&game=${gameNumber}`;
+    `?seed=${seed}`;
   useEffect(() => {
     if (seed) {
       window.history.replaceState(
@@ -333,6 +333,7 @@ function Game(props: GameProps) {
           }}
         ></input>
       </div>
+      <div className="Page-top">
       <table
         className="Game-rows"
         tabIndex={0}
@@ -350,17 +351,13 @@ function Game(props: GameProps) {
       >
         {hint || `\u00a0`}
       </p>
-      <Keyboard
-        layout={props.keyboardLayout}
-        letterInfo={letterInfo}
-        onKey={onKey}
-      />
       <div className="Game-seed-info" style={{ display: "none"}}>
         {challenge
           ? "playing a challenge game"
           : seed
           ? `${describeSeed(seed)} — length ${wordLength}, game ${gameNumber}`
           : "playing a random game"}
+      </div>
       </div>
       <br></br>
       <br></br>
@@ -427,6 +424,11 @@ function Game(props: GameProps) {
           </button>
         )}
       </p>
+          <Keyboard
+            layout={props.keyboardLayout}
+            letterInfo={letterInfo}
+            onKey={onKey}
+          />
     </div>
   );
 }

@@ -85,6 +85,10 @@ h1 {
   flex-direction: column;
 }
 
+.Page-top {
+  height: 50vh;
+}
+
 table.Game-rows {
   margin: auto;
   display: flex;
@@ -103,6 +107,7 @@ table.Game-rows > tbody {
 .Game-keyboard {
   display: flex;
   flex-direction: column;
+  justify-self: end;
 }
 
 .Game-keyboard-row {

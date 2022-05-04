@@ -34,7 +34,10 @@
 -fixed stopwatch jitter (potentially messing up other things)
 - Game defaults to one word a day feature
 
+04 May 2022:
+- Made the seed the only URL parameter
+- Created a new div to shift the keyboard and timer to the bottom (for mobile & overall visual purposes)
+
 Things left to do:
 - Add Linear Gauge
 - Add cookies to track users and keep a streak
-- Get rid of length and game
