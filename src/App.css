@@ -294,7 +294,7 @@ a:active {
 }
 
 /* stars adapted from https://webdesign.tutsplus.com/tutorials/a-simple-javascript-technique-for-filling-star-ratings--cms-29450*/
-.stars-outer {
+#stars-outer {
   display: inline-block;
   position: relative;
   font-family: FontAwesome;
@@ -302,20 +302,20 @@ a:active {
   height: 20vh;
 }
  
-.stars-outer::before {
+#stars-outer::before {
   content: "\f006 \f006 \f006 \f006 \f006";
 }
  
-.stars-inner {
+#stars-inner {
   position: absolute;
   top: 0;
   left: 0;
   white-space: nowrap;
   overflow: hidden;
-  width: 100%;
+  width: var(--width);
 }
  
-.stars-inner::before {
+#stars-inner::before {
   content: "\f005 \f005 \f005 \f005 \f005";
   color: #f8ce0b;
 }

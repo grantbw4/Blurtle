@@ -5,6 +5,7 @@ import { Clue, clue, describeClue, violation } from "./clue";
 import { Keyboard } from "./Keyboard";
 import { Stopwatch } from "./Stopwatch";
 import targetList from "./targets.json";
+import Star from "./Stars"
 import {
   describeSeed,
   dictionarySet,
@@ -17,6 +18,7 @@ import {
   urlParam,
 } from "./util";
 import { decode, encode } from "./base64";
+import { userInfo } from "os";
 enum GameState {
   Playing,
   Won,
@@ -120,14 +122,6 @@ function Game(props: GameProps) {
   const tableRef = useRef<HTMLTableElement>(null);
   const stopwatchRef = useRef<any>(null);
 
-  function checkTimer(): string {
-    return (
-      stopwatchRef.current.getTime()
-    );
-  
-  }
-
-  
   const startNextGame = () => {
     if (challenge) {
       // Clear the URL parameters:
@@ -169,11 +163,32 @@ function Game(props: GameProps) {
     }
     setHint(url);
   }
+  
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      let time = stopwatchRef.current.getTime();
+
+        console.log("hey")
+        if (time.seconds > 0 && Number.isInteger(time.seconds / 10) && gameState != GameState.Won){
+          let width = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--width').replace(/[^0-9]/g,''));
+          width -= 2;
+          document.documentElement.style.setProperty("--width", width.toString().concat('%'))
+          console.log(width)
+        }
+      
+    }, 100);
+    return () => clearInterval(timer);
+  }, []);
+
+
 
   const onKey = (key: string) => {
     if (key === "Enter") {
+
       if (stopwatchRef.current) {
         stopwatchRef.current.start();
+        
         
       }
     }
@@ -370,9 +385,7 @@ function Game(props: GameProps) {
           : "playing a random game"}
       </div>
       </div>
-      <div className="stars-outer">
-          <div className="stars-inner"></div>
-        </div>
+      <Star />
       <br></br>
       <br></br>
       <br></br>
