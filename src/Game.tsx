@@ -426,6 +426,7 @@ function Game(props: GameProps) {
       </div>
        <Star />
       <p>
+        {gameState !== GameState.Won && (
         <button
         className="pretty_button"
         style={{ flex: "0 0 auto" }}
@@ -449,7 +450,7 @@ function Game(props: GameProps) {
             }}
             >
             Give up
-        </button>
+        </button> )}
         {gameState !== GameState.Playing && (
           <button className="pretty_button"
             onClick={() => {
