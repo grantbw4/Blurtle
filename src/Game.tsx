@@ -393,7 +393,6 @@ function Game(props: GameProps) {
           : "playing a random game"}
       </div>
       </div>
-      <Star />
       <br></br>
       <br></br>
       <br></br>
@@ -403,30 +402,31 @@ function Game(props: GameProps) {
       <div className="stopwatch"> {/* !-CSS code for stopwatch adapted https://github.com/tinloof/gold-stopwatch/blob/master/script.js */}    
       <div className="time" > <Stopwatch ref={stopwatchRef} /> </div>
       </div>
+      <Star />
       <p>
       {gameState === GameState.Playing && guesses.length !== 0 && (
         <button
-            className="pretty_button"
-            style={{ flex: "0 0 auto" }}
-            disabled={gameState !== GameState.Playing || guesses.length === 0}
-            onClick={() => {
-              let completionTimeObject = stopwatchRef.current.getTime();
-              setCompletionTime(
-                completionTimeObject.minutes.toString().padStart(2, "0") + ':' +
-                completionTimeObject.seconds.toString().padStart(2, "0")  + ':' +
-                completionTimeObject.milliseconds.toString().padStart(3, "0")
-              );
-              if (stopwatchRef.current) {
-                stopwatchRef.current.stop();
-              }
-              setFinalMessage("I gave up!");
-              setHint(
-                `The answer was ${target.toUpperCase()}. (Enter to play again)`
+        className="pretty_button"
+        style={{ flex: "0 0 auto" }}
+        disabled={gameState !== GameState.Playing || guesses.length === 0}
+        onClick={() => {
+          let completionTimeObject = stopwatchRef.current.getTime();
+          setCompletionTime(
+            completionTimeObject.minutes.toString().padStart(2, "0") + ':' +
+            completionTimeObject.seconds.toString().padStart(2, "0")  + ':' +
+            completionTimeObject.milliseconds.toString().padStart(3, "0")
+            );
+            if (stopwatchRef.current) {
+              stopwatchRef.current.stop();
+            }
+            setFinalMessage("I gave up!");
+            setHint(
+              `The answer was ${target.toUpperCase()}. (Enter to play again)`
               );
               setGameState(GameState.Lost);
               (document.activeElement as HTMLElement)?.blur();
             }}
-          >
+            >
             Give up
         </button>
       )}
