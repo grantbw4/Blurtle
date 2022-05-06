@@ -427,10 +427,8 @@ function Game(props: GameProps) {
       <div className="stopwatch"> {/* !-CSS code for stopwatch adapted https://github.com/tinloof/gold-stopwatch/blob/master/script.js */}    
       <div className="time" > <Stopwatch ref={stopwatchRef} /> </div>
       </div>
-      {gameState === GameState.Playing && guesses.length !== 0 && (
-       <Star />)}
+       <Star />
       <p>
-      {gameState === GameState.Playing && guesses.length !== 0 && (
         <button
         className="pretty_button"
         style={{ flex: "0 0 auto" }}
@@ -455,7 +453,6 @@ function Game(props: GameProps) {
             >
             Give up
         </button>
-      )}
         {gameState !== GameState.Playing && (
           <button className="pretty_button"
             onClick={() => {

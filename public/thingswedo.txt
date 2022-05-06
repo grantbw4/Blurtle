@@ -37,11 +37,11 @@
 04 May 2022:
 - Made the seed the only URL parameter
 - Created a new div to shift the keyboard and timer to the bottom (for mobile & overall visual purposes)
-
-Things left to do:
 - Fix the stars
 - no new game (one daily)
 - color scheme
 - display
+
+Things left to do:
 - change css font to white
 - upload to heroku
