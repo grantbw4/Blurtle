@@ -420,7 +420,6 @@ function Game(props: GameProps) {
       <br></br>
       <br></br>
       <br></br>
-      <br></br>
       <div className="stopwatch"> {/* !-CSS code for stopwatch adapted https://github.com/tinloof/gold-stopwatch/blob/master/script.js */}    
       <div className="time" > <Stopwatch ref={stopwatchRef} /> </div>
       </div>
