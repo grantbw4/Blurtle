@@ -326,7 +326,7 @@ a:active {
 /* CSS styles for stopwatch adapted from https://github.com/tinloof/gold-stopwatch/blob/master/script.js*/
 .stopwatch {
   display: flex;
-  margin-top: -100px;
+  margin-top: -120px;
   float: center;
   justify-items: center;
   width: 100%;
