@@ -173,13 +173,13 @@ function Game(props: GameProps) {
           if (time.seconds === 20 && time.minutes === 0) {
             document.documentElement.style.setProperty("--width", "80%")
           }
-          if (time.seconds === 40 && time.minutes === 0) {
+          if (time.seconds === 50 && time.minutes === 0) {
             document.documentElement.style.setProperty("--width", "60%")
           }
-          if (time.seconds === 0 && time.minutes === 1) {
+          if (time.seconds === 30 && time.minutes === 1) {
             document.documentElement.style.setProperty("--width", "40%")
           }
-          if (time.seconds === 20 && time.minutes === 1) {
+          if (time.seconds === 0 && time.minutes === 2) {
             document.documentElement.style.setProperty("--width", "20%")
           }
 
