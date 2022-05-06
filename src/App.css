@@ -131,7 +131,7 @@ table.Game-rows > tbody {
   justify-content: center;
   font-family: inherit;
   font-size: 20px;
-  color: inherit;
+  color: black;
   text-decoration: inherit;
   border: 2px solid transparent;
   cursor: pointer;
@@ -326,7 +326,7 @@ a:active {
 /* CSS styles for stopwatch adapted from https://github.com/tinloof/gold-stopwatch/blob/master/script.js*/
 .stopwatch {
   display: flex;
-  margin-top: -120px;
+  margin-top: -100px;
   float: center;
   justify-items: center;
   width: 100%;
