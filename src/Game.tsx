@@ -170,13 +170,14 @@ function Game(props: GameProps) {
       let time = stopwatchRef.current.getTime();
 
         console.log("hey")
-        if (time.seconds > 0 && Number.isInteger(time.seconds / 10) && gameState != GameState.Won){
-          let width = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--width').replace(/[^0-9]/g,''));
-          width -= 2;
-          document.documentElement.style.setProperty("--width", width.toString().concat('%'))
-          console.log(width)
+        if (gameState === GameState.Playing) {
+          if (time.seconds > 0 && Number.isInteger(time.seconds / 10)) {
+            let width = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--width').replace(/[^0-9]/g,''));
+            width -= 2;
+            document.documentElement.style.setProperty("--width", width.toString().concat('%'))
+            console.log(width)
         }
-      
+      }
     }, 100);
     return () => clearInterval(timer);
   }, []);
