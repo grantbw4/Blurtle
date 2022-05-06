@@ -40,7 +40,7 @@ function App() {
     window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [dark, setDark] = useSetting<boolean>("dark", prefersDark);
   const [colorBlind, setColorBlind] = useSetting<boolean>("colorblind", false);
-  const [difficulty, setDifficulty] = useSetting<number>("difficulty", 0);
+  const [difficulty, setDifficulty] = useSetting<number>("difficulty", 2);
   const [keyboard, setKeyboard] = useSetting<string>(
     "keyboard",
     "qwertyuiop-asdfghjkl-BzxcvbnmE"
@@ -85,7 +85,7 @@ function App() {
           link("❌", "Close", "game")
         ) : (
           <>
-            {link("❓", "About", "about")}
+            {link("❔", "About", "about")}
           </>
         )}
       </div>

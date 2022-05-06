@@ -427,7 +427,8 @@ function Game(props: GameProps) {
       <div className="stopwatch"> {/* !-CSS code for stopwatch adapted https://github.com/tinloof/gold-stopwatch/blob/master/script.js */}    
       <div className="time" > <Stopwatch ref={stopwatchRef} /> </div>
       </div>
-      <Star />
+      {gameState === GameState.Playing && guesses.length !== 0 && (
+       <Star />)}
       <p>
       {gameState === GameState.Playing && guesses.length !== 0 && (
         <button

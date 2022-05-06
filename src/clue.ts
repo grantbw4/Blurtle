@@ -75,11 +75,11 @@ export function violation(
     const guessCount = guess.split(letter).length - 1;
     const glyph = letter.toUpperCase();
     const glyphs = glyph + (clueCount !== 1 ? "s" : "");
-    const nth = ordinal(i + 1);
+    const n = (i + 1);
 
     // Hard: enforce greens stay in place.
     if (clue === Clue.Correct && guess[i] !== letter) {
-      return nth + " letter must be " + glyph;
+      return "Letter " + n + "must be " + glyph;
     }
 
     // Hard: enforce yellows are used.
@@ -91,7 +91,7 @@ export function violation(
 
     // Ultra Hard: disallow would-be greens.
     if (ultra && clue !== Clue.Correct && guess[i] === letter) {
-      return nth + " letter can't be " + glyph;
+      return "Letter " + n + "can't be " + glyph;
     }
 
     // Ultra Hard: if the exact amount is known because of an Absent clue, enforce it.
