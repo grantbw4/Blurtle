@@ -466,14 +466,7 @@ function Game(props: GameProps) {
                 `${gameName} ${d_month}/${d_day}/${d_year}\n` +
                 `${finalMessage}\n` + 
                 `${completionTime}\n` +
-                `${getstars()}\n` +
-                  guesses
-                    .map((guess) =>
-                      clue(guess, target)
-                        .map((c) => emoji[c.clue ?? 0])
-                        .join("")
-                    )
-                    .join("\n")
+                `${getstars()}\n` 
               );
             }}
           >
