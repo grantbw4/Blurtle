@@ -1,3 +1,5 @@
+/* None of this code was changed. Just text to string features. */ 
+
 export function encode(text: string): string {
   return window
     .btoa(text)

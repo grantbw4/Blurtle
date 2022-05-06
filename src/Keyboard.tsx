@@ -5,7 +5,9 @@ interface KeyboardProps {
   letterInfo: Map<string, Clue>;
   onKey: (key: string) => void;
 }
+/* No adjustments */
 
+// Export the display of the Keyboard
 export function Keyboard(props: KeyboardProps) {
   const keyboard = props.layout
     .split("-")

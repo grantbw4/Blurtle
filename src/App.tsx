@@ -4,6 +4,9 @@ import Game from "./Game";
 import { useEffect, useReducer, useState } from "react";
 import { About } from "./About";
 
+/* Most of this code remained unchanged from "hello wordl" */
+
+/* Use the settings specified on the settings tab (which was made hidden) */
 function useSetting<T>(
   key: string,
   initial: T
@@ -25,12 +28,16 @@ function useSetting<T>(
   };
   return [current, setSetting];
 }
+/* Generate today's date for the seed */
 
 const now = new Date();
 const todaySeed =
   now.toLocaleDateString("en-US", { year: "numeric" }) +
   now.toLocaleDateString("en-US", { month: "2-digit" }) +
   now.toLocaleDateString("en-US", { day: "2-digit" });
+
+/* Create the general framework of the app */
+
 
 function App() {
   type Page = "game" | "about" | "settings";
@@ -47,6 +54,8 @@ function App() {
   );
   const [enterLeft, setEnterLeft] = useSetting<boolean>("enter-left", false);
 
+/* Determine whether to enable Dark Mode */
+
   useEffect(() => {
     document.body.className = dark ? "dark" : "";
     if (urlParam("today") !== null || urlParam("todas") !== null || urlParam("random") === null && urlParam("seed") === null) {
@@ -58,6 +67,8 @@ function App() {
     }, 1);
   }, [dark]);
 
+/* Link to connect emoji to page */
+
   const link = (emoji: string, label: string, page: Page) => (
     <button
       className="emoji-link"
@@ -68,6 +79,8 @@ function App() {
       {emoji}
     </button>
   );
+
+/* Return the setting page that was later hidden */
 
   return (
     <div className={"App-container" + (colorBlind ? " color-blind" : "")}>

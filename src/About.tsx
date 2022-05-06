@@ -1,6 +1,8 @@
 import { Clue } from "./clue";
 import { Row, RowState } from "./Row";
 import { gameName, maxGuesses } from "./util";
+  
+/* This is the about function. It is what produces the about screen that populates once you press the question mark on the screen. */
 
 export function About() {
   return (

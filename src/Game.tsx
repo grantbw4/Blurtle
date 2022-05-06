@@ -25,6 +25,8 @@ enum GameState {
   Lost,
 }
 
+/* We added a lot to this file in particular. This file is essentially the mechanics of the gameplay*/
+
 interface GameProps {
   maxGuesses: number;
   hidden: boolean;
@@ -32,7 +34,7 @@ interface GameProps {
   colorBlind: boolean;
   keyboardLayout: string;
 }
-
+/* Choose fairly common words */
 const targets = targetList.slice(0, targetList.indexOf("murky") + 1); // Words no rarer than this one
 const minLength = 4;
 const defaultLength = 5;
@@ -40,6 +42,7 @@ const maxLength = 11;
 const limitLength = (n: number) =>
   n >= minLength && n <= maxLength ? n : defaultLength;
 
+/* Choose a random target word (obsolete with daily word) */
 function randomTarget(wordLength: number): string {
   const eligible = targets.filter((word) => word.length === wordLength);
   let candidate: string;
@@ -50,7 +53,7 @@ function randomTarget(wordLength: number): string {
 }
 
 
-
+/* Feature to send a challenge URL to another player (removed) */
 function getChallengeUrl(target: string): string {
   return (
     window.location.origin +
@@ -73,6 +76,8 @@ if (initChallenge && !dictionarySet.has(initChallenge)) {
   challengeError = true;
 }
 
+/* Look at URL to determine length and game number (we took these away from the URL) */
+
 function parseUrlLength(): number {
   const lengthParam = urlParam("length");
   if (!lengthParam) return defaultLength;
@@ -86,6 +91,7 @@ function parseUrlGameNumber(): number {
   return gameNumber >= 1 && gameNumber <= 1000 ? gameNumber : 1;
 }
 
+/* Import basic variables for the game. */
 function Game(props: GameProps) {
   const [gameState, setGameState] = useState(GameState.Playing);
   const [guesses, setGuesses] = useState<string[]>([]);
@@ -119,8 +125,11 @@ function Game(props: GameProps) {
       );
     }
   }, [wordLength, gameNumber]);
+  /* Import the References for the Table and for the Stopwatch */
   const tableRef = useRef<HTMLTableElement>(null);
   const stopwatchRef = useRef<any>(null);
+
+/* Assign steps for when a new game is begun */
 
   const startNextGame = () => {
     if (challenge) {
@@ -137,6 +146,8 @@ function Game(props: GameProps) {
     setGameState(GameState.Playing);
     setGameNumber((x) => x + 1);
   };
+
+  // Function to share URL of game
 
   async function share(copiedHint: string, text?: string) {
     const url = seed
@@ -164,7 +175,7 @@ function Game(props: GameProps) {
     setHint(url);
   }
   
-
+// This function fills in the star element according to the number of 30 second intervals that have passed. 
   useEffect(() => {
     const timer = setInterval(() => {
       let time = stopwatchRef.current.getTime();
@@ -191,6 +202,9 @@ function Game(props: GameProps) {
     return () => clearInterval(timer);
   }, []);
 
+
+/* Assigns a number of stars depending on the time elapsed */
+
   function getstars() {
       let done = "⭐⭐⭐⭐⭐" as string;
       let time = stopwatchRef.current.getTime();
@@ -213,7 +227,7 @@ function Game(props: GameProps) {
     return done;
   }
 
-
+// When the enter key is pressed and the game is being played, start the timer.
 
   const onKey = (key: string) => {
     if ((key === "Enter") && (gameState !== GameState.Won)) {
@@ -222,15 +236,9 @@ function Game(props: GameProps) {
         stopwatchRef.current.start();
       }
     }
-    if (gameState !== GameState.Playing && gameState !== GameState.Won) {
-      if (key === "Enter") {
-        if (stopwatchRef.current) {
-          stopwatchRef.current.reset();
-        }
-      }
-      return;
-    }
+    // If you've reached the max number of guesses, exit
     if (guesses.length === props.maxGuesses) return;
+    // If you're still playing, determine whether the strings entered are real words and if they violate any rules. Then assign them clues
     if (gameState === GameState.Playing) {
       if (/^[a-z]$/i.test(key)) {
         setCurrentGuess((guess) =>
@@ -261,11 +269,12 @@ function Game(props: GameProps) {
         setGuesses((guesses) => guesses.concat([currentGuess]));
         setCurrentGuess((guess) => "");
       }
-
+      // Alert the player if they won or lost at the end of the game.
       const gameOver = (verbed: string) =>
 
         `You ${verbed}! The answer was ${target.toUpperCase()}. Play again tomorrow!`;
-
+      
+        // Tell the player they won and stop the timer, saving the value.
       if (currentGuess === target) {
         setHint(gameOver("won"));
         setGameState(GameState.Won);
@@ -280,6 +289,7 @@ function Game(props: GameProps) {
           completionTimeObject.seconds.toString().padStart(2, "0")  + ':' +
           completionTimeObject.milliseconds.toString().padStart(3, "0")
         );
+        // If they've exceeded the total number of guesses (basically impossible because you have 100000 in this game, tell them they lost and stop the timer)
       } else if (guesses.length + 1 === props.maxGuesses) {
         setHint(gameOver("lost"));
         setFinalMessage("I lost!");
@@ -299,7 +309,7 @@ function Game(props: GameProps) {
       }
     }
   };
-
+  // Allow for the backspace to prevent previous actions
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (!e.ctrlKey && !e.metaKey) {
@@ -315,6 +325,7 @@ function Game(props: GameProps) {
     };
   }, [currentGuess, gameState]);
 
+  // Adjust the colors of the keyboard letters
   let letterInfo = new Map<string, Clue>();
   for (let guess of guesses) {
     const cluedLetters = clue(guess, target);
@@ -327,11 +338,12 @@ function Game(props: GameProps) {
       }
     }
   }
+  // Make the array only 2 rows long
   const tableRows = Array(2)
     .fill(undefined)
     .map((_, i) => {
       let guess = '';
-
+      // If this is your first guess, don't show the previosu guess, otherwise, show the current guess and the previous one.
       if (guesses.length >= 1) {
         if (i === 0) {
           guess = guesses[guesses.length - 1];
@@ -345,7 +357,7 @@ function Game(props: GameProps) {
       }
       const cluedLetters = clue(guess, target);
       const lockedIn = i < guesses.length && i === 0;
-
+      // Display the rows.
       return (
         <Row
           key={i}
@@ -361,7 +373,10 @@ function Game(props: GameProps) {
         />
       );
     });
-
+  // Hide the game settings and set the default word length to 5.
+  // Also, hide the alerts of removed features
+  // Make the Give Up button go away once the game is over and disable it while the length of guesses is 0.
+  // Make "Share Emoji" button appear once the game is over and populate it with the "Final Message" of whether the player won and their time + stars.
   return (
     <div className="Game" style={{ display: props.hidden ? "none" : "block" }} >
       <div className="Game-options" style={{ display: "none"}}>

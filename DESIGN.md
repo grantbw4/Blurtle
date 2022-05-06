@@ -22,5 +22,3 @@ The intended audience of this game is anyone who, like us, identifies as Worlde 
 Visually impaired users, as well anyone sensitive to strobing lights, could be inequitably affected by this website. As the project expands, we hope to make this game more accessible for those populations. 
 
 If this project were widely adopted, we would want to be cautious about how (and whether) we track users to provide scoreboards. We would want to preserve users' privacy as much as possible. 
-
-

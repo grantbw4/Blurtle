@@ -13,6 +13,10 @@ interface RowProps {
   annotation?: string;
 }
 
+// No adjustments 
+
+
+// Make each letter uppercase and populate the rows with the letters current guess. Lock previous guesses
 export function Row(props: RowProps) {
   const isLockedIn = props.rowState === RowState.LockedIn;
   const isEditing = props.rowState === RowState.Editing;

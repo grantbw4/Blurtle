@@ -13,6 +13,7 @@ type StopwatchActions =
   | { type: "reset" }
   | { type: "tick" };
 
+  // Enable Switching between states
 export function StopwatchReducer(
   state: StopwatchState,
   action: StopwatchActions
@@ -33,6 +34,7 @@ export function StopwatchReducer(
       };
   }
 }
+// Take the time passed and put it into stopwatch form
 export function parseTime(
   time: number
 ): { minutes: number; seconds: number; milliseconds: number } {
@@ -46,6 +48,7 @@ export function parseTime(
     milliseconds
   };
 }
+// Create a forward ref of the Dispatch effects and the state of the stopwatch
 export const Stopwatch = React.forwardRef((props, ref) => {
   const [state, dispatch] = useReducer(StopwatchReducer, {
     running: false,
@@ -62,6 +65,7 @@ export const Stopwatch = React.forwardRef((props, ref) => {
     return () => cancelAnimationFrame(frame);
   }, []);
 
+  // Create a handler
   useImperativeHandle(ref, () => ({
       start: () => {
         dispatch({ type: "start" })
@@ -77,6 +81,7 @@ export const Stopwatch = React.forwardRef((props, ref) => {
       }
   }))
 
+  // Set the time equal to the parsed time
   const time = parseTime(state.currentTime);
   return (
     <div className="bg-gray-900 text-white h-screen flex flex-col justify-center items-center">

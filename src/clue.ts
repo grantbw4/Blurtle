@@ -1,5 +1,9 @@
 import { Difficulty, englishNumbers } from "./util";
 
+/* Minor adjustments were made to this file. */
+
+/* The three types of clues*/
+
 export enum Clue {
   Absent,
   Elsewhere,
@@ -10,6 +14,8 @@ export interface CluedLetter {
   clue?: Clue;
   letter: string;
 }
+
+/* Generate the clues given the guess string and the target word*/
 
 export function clue(word: string, target: string): CluedLetter[] {
   let elusive: string[] = [];
@@ -32,6 +38,7 @@ export function clue(word: string, target: string): CluedLetter[] {
   });
 }
 
+/* Assign a clueClass for each letter in the guess*/
 export function clueClass(clue: Clue): string {
   if (clue === Clue.Absent) {
     return "letter-absent";
@@ -41,7 +48,7 @@ export function clueClass(clue: Clue): string {
     return "letter-correct";
   }
 }
-
+/* Assign a word based on the Clue type*/
 export function clueWord(clue: Clue): string {
   if (clue === Clue.Absent) {
     return "no";
@@ -52,12 +59,13 @@ export function clueWord(clue: Clue): string {
   }
 }
 
+/* Describe the Clue */
 export function describeClue(clue: CluedLetter[]): string {
   return clue
     .map(({ letter, clue }) => letter.toUpperCase() + " " + clueWord(clue!))
     .join(", ");
 }
-
+/* Based on the difficulty of the game, determine whether there are any violations (not using all available information). */
 export function violation(
   difficulty: Difficulty,
   clues: CluedLetter[],

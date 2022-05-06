@@ -5,12 +5,13 @@ export enum Difficulty {
   Hard,
   UltraHard,
 }
-
+// Change the gameName to blurtle and the max number of guesses to 100000
 export const gameName = "blurtle";
 export const maxGuesses = 100000;
 
 export const dictionarySet: Set<string> = new Set(dictionary);
 
+// Function for Seeding
 function mulberry32(a: number) {
   return function () {
     var t = (a += 0x6d2b79f5);
@@ -20,23 +21,27 @@ function mulberry32(a: number) {
   };
 }
 
+// Retrieve items from the URL
 export function urlParam(name: string): string | null {
   return new URLSearchParams(window.location.search).get(name);
 }
 
+// Use the mulberry function to produce a random number based on the seed
 export const seed = Number(urlParam("seed"));
 const makeRandom = () => (seed ? mulberry32(seed) : () => Math.random());
 let random = makeRandom();
 
+// Reset the Random Number Generator
 export function resetRng(): void {
   random = makeRandom();
 }
-
+// Pick a random word from the array
 export function pick<T>(array: Array<T>): T {
   return array[Math.floor(array.length * random())];
 }
 
 // https://a11y-guidelines.orange.com/en/web/components-examples/make-a-screen-reader-talk/
+// Code for accessibility (not changed)
 export function speak(
   text: string,
   priority: "polite" | "assertive" = "assertive"
@@ -57,6 +62,7 @@ export function speak(
   }, 1000);
 }
 
+// Create ordinal suffixes based on the number
 export function ordinal(n: number): string {
   return n + (["st", "nd", "rd"][(n % 100 >> 3) ^ 1 && n % 10] || "th");
 }
@@ -64,6 +70,7 @@ export function ordinal(n: number): string {
 export const englishNumbers =
   "zero one two three four five six seven eight nine ten eleven".split(" ");
 
+// Generate today's date as the seed
 export function describeSeed(seed: number): string {
   const year = Math.floor(seed / 10000);
   const month = Math.floor(seed / 100) % 100;
