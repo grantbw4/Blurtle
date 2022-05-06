@@ -5,7 +5,7 @@ import { Clue, clue, describeClue, violation } from "./clue";
 import { Keyboard } from "./Keyboard";
 import { Stopwatch } from "./Stopwatch";
 import targetList from "./targets.json";
-import Star from "./Stars"
+import Star from "./Stars";
 import {
   describeSeed,
   dictionarySet,

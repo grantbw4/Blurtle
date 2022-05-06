@@ -39,5 +39,9 @@
 - Created a new div to shift the keyboard and timer to the bottom (for mobile & overall visual purposes)
 
 Things left to do:
-- Add Linear Gauge
-- Add cookies to track users and keep a streak
+- Fix the stars
+- no new game (one daily)
+- color scheme
+- display
+- change css font to white
+- upload to heroku
