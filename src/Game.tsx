@@ -195,13 +195,13 @@ function Game(props: GameProps) {
       let done = "⭐⭐⭐⭐⭐" as string;
       let time = stopwatchRef.current.getTime();
 
-          if (time.seconds >= 20 && time.seconds < 50 &&time.minutes === 0 ) {
+          if (time.seconds >= 30 && time.seconds < 60 &&time.minutes === 0 ) {
             done = "⭐⭐⭐⭐"
           }
-          if ((time.seconds >= 50 && time.minutes === 0) || (time.seconds <= 30 && time.minutes === 1) ) {
+          if ((time.seconds <= 30 && time.minutes === 1)) {
             done = "⭐⭐⭐"
           }
-          if (time.seconds >= 30 && time.minutes === 1) {
+          if (time.seconds > 30 && time.minutes === 1) {
             done = "⭐⭐"
           }
           if (time.seconds >= 0 && time.minutes >= 2) {
@@ -217,15 +217,13 @@ function Game(props: GameProps) {
 
 
   const onKey = (key: string) => {
-    if (key === "Enter") {
+    if ((key === "Enter") && (gameState !== GameState.Won)) {
 
       if (stopwatchRef.current) {
         stopwatchRef.current.start();
-        
-        
       }
     }
-    if (gameState !== GameState.Playing) {
+    if (gameState !== GameState.Playing && gameState !== GameState.Won) {
       if (key === "Enter") {
         if (stopwatchRef.current) {
           stopwatchRef.current.reset();
@@ -234,38 +232,40 @@ function Game(props: GameProps) {
       return;
     }
     if (guesses.length === props.maxGuesses) return;
-    if (/^[a-z]$/i.test(key)) {
-      setCurrentGuess((guess) =>
-        (guess + key.toLowerCase()).slice(0, wordLength)
-      );
-      tableRef.current?.focus();
-      setHint("");
-    } else if (key === "Backspace") {
-      setCurrentGuess((guess) => guess.slice(0, -1));
-      setHint("");
-    } else if (key === "Enter") {
-      if (currentGuess.length !== wordLength) {
-        setHint("Too short");
-        return;
-      }
-      if (!dictionary.includes(currentGuess)) {
-        setHint("Not a valid word");
-        return;
-      }
-      for (const g of guesses) {
-        const c = clue(g, target);
-        const feedback = violation(props.difficulty, c, currentGuess);
-        if (feedback) {
-          setHint(feedback);
+    if (gameState === GameState.Playing) {
+      if (/^[a-z]$/i.test(key)) {
+        setCurrentGuess((guess) =>
+          (guess + key.toLowerCase()).slice(0, wordLength)
+        );
+        tableRef.current?.focus();
+        setHint("");
+      } else if (key === "Backspace") {
+        setCurrentGuess((guess) => guess.slice(0, -1));
+        setHint("");
+      } else if (key === "Enter") {
+        if (currentGuess.length !== wordLength) {
+          setHint("Too short");
           return;
         }
+        if (!dictionary.includes(currentGuess)) {
+          setHint("Not a valid word");
+          return;
+        }
+        for (const g of guesses) {
+          const c = clue(g, target);
+          const feedback = violation(props.difficulty, c, currentGuess);
+          if (feedback) {
+            setHint(feedback);
+            return;
+          }
+        }
+        setGuesses((guesses) => guesses.concat([currentGuess]));
+        setCurrentGuess((guess) => "");
       }
-      setGuesses((guesses) => guesses.concat([currentGuess]));
-      setCurrentGuess((guess) => "");
 
       const gameOver = (verbed: string) =>
 
-        `You ${verbed}! The answer was ${target.toUpperCase()}.`;
+        `You ${verbed}! The answer was ${target.toUpperCase()}. Play again tomorrow!`;
 
       if (currentGuess === target) {
         setHint(gameOver("won"));
@@ -426,7 +426,7 @@ function Game(props: GameProps) {
       </div>
        <Star />
       <p>
-        {gameState !== GameState.Won && (
+        {gameState !== GameState.Won && gameState !== GameState.Lost && (
         <button
         className="pretty_button"
         style={{ flex: "0 0 auto" }}
@@ -443,7 +443,7 @@ function Game(props: GameProps) {
             }
             setFinalMessage("I gave up!");
             setHint(
-              `The answer was ${target.toUpperCase()}. (Enter to play again)`
+              `The answer was ${target.toUpperCase()}. Play again tomorrow!`
               );
               setGameState(GameState.Lost);
               (document.activeElement as HTMLElement)?.blur();
@@ -454,9 +454,6 @@ function Game(props: GameProps) {
         {gameState !== GameState.Playing && (
           <button className="pretty_button"
             onClick={() => {
-              const emoji = props.colorBlind
-                ? ["⬛", "🟦", "🟧"]
-                : ["⬛", "🟨", "🟩"];
               const d = new Date();
               let d_day = d.getDate();
               let d_month = d.getMonth();

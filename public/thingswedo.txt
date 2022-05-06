@@ -41,7 +41,9 @@
 - no new game (one daily)
 - color scheme
 - display
+- get rid of squares
+- change css font to white
+- fix enter button
 
 Things left to do:
-- change css font to white
 - upload to heroku

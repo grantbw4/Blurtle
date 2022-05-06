@@ -80,6 +80,14 @@ export function About() {
         annotation={"Congrats!"}
       />
       <p>
+      <hr />
+      <p>
+        If you guess the word in under 30 seconds, you get five stars.
+      </p>
+      <strong>⭐⭐⭐⭐⭐</strong>
+      <p>
+        Every additional thirty seconds means you lose 1 more star, so BLURT quickly if you want to outscore your friends!
+      </p>
         Best of luck! Enjoy your gameplay.
       </p>
     </div>
