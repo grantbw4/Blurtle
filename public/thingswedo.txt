@@ -44,6 +44,4 @@
 - get rid of squares
 - change css font to white
 - fix enter button
-
-Things left to do:
-- upload to heroku
+- upload to GitHub
