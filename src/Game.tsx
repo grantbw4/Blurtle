@@ -169,15 +169,22 @@ function Game(props: GameProps) {
     const timer = setInterval(() => {
       let time = stopwatchRef.current.getTime();
 
-        console.log("hey")
-        if (gameState === GameState.Playing) {
-          if (time.seconds > 0 && Number.isInteger(time.seconds / 10)) {
-            let width = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--width').replace(/[^0-9]/g,''));
-            width -= 2;
-            document.documentElement.style.setProperty("--width", width.toString().concat('%'))
-            console.log(width)
-        }
-      }
+
+          if (time.seconds === 20 && time.minutes === 0) {
+            document.documentElement.style.setProperty("--width", "80%")
+          }
+          if (time.seconds === 40 && time.minutes === 0) {
+            document.documentElement.style.setProperty("--width", "60%")
+          }
+          if (time.seconds === 0 && time.minutes === 1) {
+            document.documentElement.style.setProperty("--width", "40%")
+          }
+          if (time.seconds === 20 && time.minutes === 1) {
+            document.documentElement.style.setProperty("--width", "20%")
+          }
+
+        
+      
     }, 100);
     return () => clearInterval(timer);
   }, []);
