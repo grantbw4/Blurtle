@@ -230,7 +230,6 @@ function Game(props: GameProps) {
         if (stopwatchRef.current) {
           stopwatchRef.current.reset();
         }
-        startNextGame();
       }
       return;
     }
@@ -266,9 +265,7 @@ function Game(props: GameProps) {
 
       const gameOver = (verbed: string) =>
 
-        `You ${verbed}! The answer was ${target.toUpperCase()}. (Enter to ${
-          challenge ? "play a random game" : "play again"
-        })`;
+        `You ${verbed}! The answer was ${target.toUpperCase()}.`;
 
       if (currentGuess === target) {
         setHint(gameOver("won"));
