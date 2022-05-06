@@ -2,7 +2,7 @@
 
 It's [Wordle](https://www.powerlanguage.co.uk/wordle/) but it's timed!
 
-Play it [**here**](https://blurtle.net/).
+Play it [**here**](https://grantbw4.github.io/blurtle ).
 
 ## Introduction
 
