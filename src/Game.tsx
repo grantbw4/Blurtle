@@ -186,7 +186,7 @@ function Game(props: GameProps) {
           if (time.seconds === 30 && time.minutes === 0) {
             document.documentElement.style.setProperty("--width", "80%")
           }
-          if (time.seconds === 0 && time.minutes === 2) {
+          if (time.seconds === 0 && time.minutes === 1) {
             document.documentElement.style.setProperty("--width", "60%")
           }
           if (time.seconds === 30 && time.minutes === 1) {
