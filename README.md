@@ -4,7 +4,7 @@ It's [Wordle](https://www.powerlanguage.co.uk/wordle/) but it's timed!
 
 Play it [**here**](https://grantbw4.github.io/blurtle ).
 
-Youtube [**Walkthrough**] (https://youtu.be/s3P1hjNMP1c) 
+Youtube [**Walkthrough**](https://youtu.be/s3P1hjNMP1c) 
 
 ## Introduction
 
