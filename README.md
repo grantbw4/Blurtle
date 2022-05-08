@@ -5,6 +5,8 @@ It's [Wordle](https://www.powerlanguage.co.uk/wordle/) but it's timed!
 Play it [**here**](https://grantbw4.github.io/blurtle ).
 
 Youtube [**Walkthrough**](https://youtu.be/s3P1hjNMP1c) 
+Youtube [**Walkthrough**](https://www.youtube.com/watch?v=n9cjbf8gEgI) PART 2 BAYBEE
+https://www.youtube.com/watch?v=n9cjbf8gEgI
 
 ## Introduction
 
