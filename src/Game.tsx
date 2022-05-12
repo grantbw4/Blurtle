@@ -219,7 +219,7 @@ function Game(props: GameProps) {
             done = "⭐"
           }
           if (gameState === GameState.Lost) {
-            done = ""
+            done = "";
           }
 
     return done;
@@ -273,7 +273,7 @@ function Game(props: GameProps) {
         `You ${verbed}! The answer was ${target.toUpperCase()}. Play again tomorrow!`;
       
         // Tell the player they won and stop the timer, saving the value.
-      if (currentGuess === target) {
+      if (currentGuess === target && key === "Enter") {
         setHint(gameOver("won"));
         setGameState(GameState.Won);
         setFinalMessage("I won!");
@@ -474,7 +474,7 @@ function Game(props: GameProps) {
                 `${gameName} ${d_month}/${d_day}/${d_year}\n` +
                 `${finalMessage}\n` + 
                 `${completionTime}\n` +
-                `${getstars()}\n` 
+                `${getstars()}` 
               );
             }}
           >
