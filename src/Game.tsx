@@ -150,7 +150,7 @@ function Game(props: GameProps) {
   // Function to share URL of game
 
   async function share(copiedHint: string, text?: string) {
-    const url = "https://blurtle.one/"
+    const url = "https://blurtle.one"
     const body = url + (text ? "\n\n" + text : "");
     if (
       /android|iphone|ipad|ipod|webos/i.test(navigator.userAgent) &&
@@ -467,7 +467,7 @@ function Game(props: GameProps) {
             onClick={() => {
               const d = new Date();
               let d_day = d.getDate();
-              let d_month = d.getMonth();
+              let d_month = d.getMonth() + 1;
               let d_year = d.getFullYear();
               share(
                 "Result copied to clipboard!",
