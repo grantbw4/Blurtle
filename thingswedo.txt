@@ -1,0 +1,47 @@
+20 April 2022:
+- forked "hello wordl" and made repository
+- installed npm and n to computer to be able to edit the code
+
+21 April 2022:
+- adjusted about page to reflect Blurtle rules
+- changed favicon
+- changed background color in CSS
+
+25 April 2022:
+- got rid of slider
+- got rid of settings
+- got rid of random/today option
+- added a stopwatch
+
+26 April 2022:
+- Added dynamic background
+- Changed CSS of "share link" button
+- make sure difficulty is right
+
+27 April 2022:
+- infinite number of guesses but only two rows
+- automate stopwatch using ref
+- Make letters stay gray
+- infinite number of guesses but only two rows
+- add stopwatch to score to be sent out
+
+29 April 2022: 
+- Brought back give up button
+- Added messages to score to be sent out
+
+
+02 May 2022:
+-fixed stopwatch jitter (potentially messing up other things)
+- Game defaults to one word a day feature
+
+04 May 2022:
+- Made the seed the only URL parameter
+- Created a new div to shift the keyboard and timer to the bottom (for mobile & overall visual purposes)
+- Fix the stars
+- no new game (one daily)
+- color scheme
+- display
+- get rid of squares
+- change css font to white
+- fix enter button
+- upload to GitHub

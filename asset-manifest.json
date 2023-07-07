@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/blurtle/static/css/main.077f533d.css",
+    "main.js": "/blurtle/static/js/main.c77a4e06.js",
+    "index.html": "/blurtle/index.html",
+    "main.077f533d.css.map": "/blurtle/static/css/main.077f533d.css.map",
+    "main.c77a4e06.js.map": "/blurtle/static/js/main.c77a4e06.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.077f533d.css",
+    "static/js/main.c77a4e06.js"
+  ]
+}
