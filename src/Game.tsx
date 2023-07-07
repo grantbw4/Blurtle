@@ -150,7 +150,7 @@ function Game(props: GameProps) {
   // Function to share URL of game
 
   async function share(copiedHint: string, text?: string) {
-    const url = "https://blurtle.one"
+    const url = "https://grantbw4.github.io/blurtle/"
     const body = url + (text ? "\n\n" + text : "");
     if (
       /android|iphone|ipad|ipod|webos/i.test(navigator.userAgent) &&
